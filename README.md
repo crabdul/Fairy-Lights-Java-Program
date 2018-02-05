@@ -22,6 +22,8 @@ brew install maven
 ### Installing
 
 ```
+git clone https://github.com/crabdul/Fairy-Lights-Java-Program.git
+cd Fairy-Lights-Java-Program
 mvn clean install 
 ```
 
