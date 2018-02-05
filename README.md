@@ -1,6 +1,10 @@
-# Fairy-Lights-Java-Program
+# Fairy Lights Java Program
 
-Java Programme for fairy lights exercise
+ Java program to turn on/off a set of coloured lights in sequence. 
+ The number of lights are configurable on the command line. 
+ The default colour sequence is "red, green, white".
+ Each light should remain on for 1 second and then turn off.
+ Colours and sequence can be specified in the command line:
 
 ## Getting Started
 
@@ -21,10 +25,32 @@ brew install maven
 mvn clean install 
 ```
 
-### Running the Applet
+### Running the Program
+```
+cd target
+```
+
+Number of lights specified after "-number"
 
 ```
-java -jar fairylightsexercise-1.0.jar
+java -jar fairylightsexercise-1.0.jar -number 15
+```
+
+Sequence options specified after "-sequence":
+ - default parameter "linear" - lights turn on/off in a linear order
+ - "even" - only even indexed lights turned on/off
+ - "odd" - only odd indexed lights turned on/off
+ - "same" - same coloured lights turned on/off consecutively
+ 
+```
+java -jar fairylightsexercise-1.0.jar -number 15 -sequence even
+```
+ 
+ Colour options specified after "-colours" with space between arguments
+ e.g. -colours red orange blue
+
+```
+java -jar fairylightsexercise-1.0.jar -number 15 -sequence even -colours red orange pink
 ```
 
 ## Built With
