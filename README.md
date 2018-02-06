@@ -32,10 +32,10 @@ mvn clean install
 cd target
 ```
 
-Number of lights specified after "-number"
+Number of lights specified after "-n"
 
 ```
-java -jar fairylightsexercise-1.0.jar -number 15
+java -jar fairylightsexercise-1.0.jar -n 17
 ```
 
 Sequence options specified after "-sequence":
