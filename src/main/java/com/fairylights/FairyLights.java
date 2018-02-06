@@ -27,6 +27,7 @@ public class FairyLights {
     // Switch Light state in light array
     public void switchLightState(int i){
         this.lightsArr.get(i).switchState();
+        getLightStatus(i);
     }
 
     private void createLightsArr(String sequence) {
@@ -49,6 +50,17 @@ public class FairyLights {
     // Get number of lights
     public int getNumLights(){
         return this.lightsArr.size();
+    }
+    // Get light state 
+    private String getLightState(int i){
+        return this.lightsArr.get(i).getState() ? "On" : "Off";
+    }
+    private String getLightColour(int i){
+        return this.lightsArr.get(i).getColour();
+    }
+    // Print Current Light State
+    private void getLightStatus(int i){
+        System.out.println(String.format("%s Light %s", getLightColour(i), getLightState(i)));
     }
     
 }

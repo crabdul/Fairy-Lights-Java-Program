@@ -47,6 +47,7 @@ class LightController extends TimerTask {
             System.out.print(e);
         }
     }
+    // Return TimeStamp
     private void getTime() {
         Date date = new Date();
         SimpleDateFormat ft = new SimpleDateFormat ("hh:mm:ss");

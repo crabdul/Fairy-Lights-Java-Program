@@ -26,11 +26,5 @@ public class Light {
     // Flip light state
     public void switchState(){
         setState(!getState());
-        getCurrentStatus();
-    }
-    // Print Current Light State
-    private void getCurrentStatus(){
-        String state = this.getState() ? "On" : "Off";
-        System.out.println(String.format("%s Light %s", this.getColour(), state));
     }
 }
