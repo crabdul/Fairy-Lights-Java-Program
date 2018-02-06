@@ -42,17 +42,9 @@ Sequence options specified after "-sequence":
  - default parameter "linear" - lights turn on/off in a linear order
  - "even" - only even indexed lights turned on/off
  - "odd" - only odd indexed lights turned on/off
- - "same" - same coloured lights turned on/off consecutively
  
 ```
-java -jar fairylightsexercise-1.0.jar -number 15 -sequence even
-```
- 
- Colour options specified after "-colours" with space between arguments
- e.g. -colours red orange blue
-
-```
-java -jar fairylightsexercise-1.0.jar -number 15 -sequence even -colours red orange pink
+java -jar fairylightsexercise-1.0.jar -sequence even -number 12 
 ```
 
 ## Built With
