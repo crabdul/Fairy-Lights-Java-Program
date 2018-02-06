@@ -44,7 +44,7 @@ Sequence options specified after "-sequence":
  - "odd" - only odd indexed lights turned on/off
  
 ```
-java -jar fairylightsexercise-1.0.jar -sequence even -number 12 
+java -jar fairylightsexercise-1.0.jar -sequence even -n 12 
 ```
 
 ## Built With
