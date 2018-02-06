@@ -9,8 +9,7 @@ import java.text.SimpleDateFormat;
 class LightController extends TimerTask {
     private FairyLights fl;
     private String sequence;
-    private Date date;
-    private SimpleDateFormat ft;
+
     /**
      * @param fairylights   FairyLights Object 
      * @param sequence      light sequence order
@@ -26,16 +25,20 @@ class LightController extends TimerTask {
             switch(this.sequence){
                 // Only turn on and off even indexed lights
                 case "even":
-                    start = 1;
-                    increment = 2;
+                    if(this.fl.getNumLights() != 1){
+                        start = 1;
+                        increment = 2;
+                    }
                     break;
                 // Only turn on and off even indexed lights
                 case "odd":
-                    increment = 2;
+                    if(this.fl.getNumLights() != 1){
+                        increment = 2;
+                    }
                     break;
             }
             // Loop over lights switching their states
-            for(int i = start; i < fl.getNumLights(); i = i + increment){
+            for(int i = start; i < this.fl.getNumLights(); i = i + increment){
                 getTime();
                 fl.switchLightState(i);
                 Thread.sleep(1000);

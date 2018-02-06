@@ -19,14 +19,24 @@ public class CommandLineParser{
         HashMap<String,String> options = new HashMap<String,String>();
         // Loop over arguments
         for (int i = 0; i < args.length; i++) {
-            // Check if sequence specified
-            if(args[i].equals("-sequence")){
-                options.put("sequence", args[i+1]);
+            try {
+                // Check if sequence specified
+                if(args[i].equals("-sequence") ){
+                    options.put("sequence", args[i+1]);
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid sequence");
             }
-            // Check if number specified
-            if(args[i].equals("-n")){
-                options.put("n", args[i+1]);
-            }
+                // Check if number specified
+                if(args[i].equals("-n")){
+                    try {
+                        // Check if argument can be parsed into an integer
+                        int temp = Integer.parseInt(args[i+1]);
+                        options.put("n", args[i+1]);
+                    } catch (Exception e) {
+                        System.out.println("Invalid n");
+                    }
+                }
         }
         return options;
     }
