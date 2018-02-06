@@ -1,5 +1,7 @@
 package com.fairylights;
 
+import java.util.Timer;
+
 /**
  * Fairy Lights App
  * 
@@ -7,47 +9,45 @@ package com.fairylights;
  * The number of lights are configurable on the command line. 
  * The default colour sequence is "red, green, white".
  * Each light should remain on for 1 second and then turn off.
- * Colours and sequence can be specified in the command line:
+ * sequence can be specified in the command line:
  * 
  * Sequence options specified after "-sequence":
  * - "even" - only even indexed lights turned on/off
  * - "odd" - only odd indexed lights turned on/off
  * - "same" - same coloured lights turned on/off consecutively
  * 
- * Colour options specified after "-colours" with space between arguments
- * e.g. -colours red orange blue
  *
  */
 public class App {
+    // private FairyLights fairyLights;
     public static void main( String[] args ) {
         try {    
-            // Parse Command Line Arguments
-            CliArgs cliArgs = new CliArgs(args);
-            // Create fairy lights
-            FairyLights fairylights = createLights(cliArgs);
+            final FairyLights fairyLights;
+            final Timer timer;
+            String sequence = "linear"; // Default sequence
+
+            // Parse Arguments
+            CommandLineParser parser = new CommandLineParser(args);
+            // Create fairy lights dependent on command line arguments
+            if(parser.optionPresent("n") && parser.optionPresent("sequence")){
+                fairyLights = new FairyLights(Integer.parseInt(parser.optionValue("n")));
+                sequence = parser.optionValue("sequence");
+            } else if(parser.optionPresent("n")) {
+                fairyLights = new FairyLights(Integer.parseInt(parser.optionValue("n")));
+                System.out.println(String.format("Default value for sequence (linear) used "));
+            } else if(parser.optionPresent("sequence")) {
+                fairyLights = new FairyLights();
+                sequence = parser.optionValue("sequence");
+                System.out.println(String.format("Default value for number of lights (%s) used ",fairyLights.getNumLights()));
+            } else {
+                fairyLights = new FairyLights();
+                System.out.println(String.format("Default value for number of lights (%s) and sequence (linear) used ",fairyLights.getNumLights()));
+            }
             // Start fairy lights
-            fairylights.startLights();
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new LightController(fairyLights, sequence), 0, 1000);
         } catch (Exception e) {
             System.out.print(e);
         }
-    }
-    // Returns FairyLights Object created with command line arguments
-    private static FairyLights createLights(CliArgs cliArgs) {
-        int n = Integer.parseInt(cliArgs.optionValue("number")); // number of fairy lights
-        FairyLights fairyLights;
-        // Optional arguments: Colours and Sequence specified
-        if(cliArgs.optionPresent("colours") && cliArgs.optionPresent("sequence")){
-            fairyLights = new FairyLights(n,cliArgs.optionValues("colours"),cliArgs.optionValue("sequence"));
-        // Only colours specified
-        } else if(cliArgs.optionPresent("colours")) {
-            fairyLights = new FairyLights(n,cliArgs.optionValues("colours"));
-        // Only sequence specified
-        } else if(cliArgs.optionPresent("sequence")) {
-            fairyLights = new FairyLights(n,cliArgs.optionValue("sequence"));
-        // No optional arguments specified
-        } else {
-            fairyLights = new FairyLights(n);
-        }
-        return fairyLights;
     }
 }

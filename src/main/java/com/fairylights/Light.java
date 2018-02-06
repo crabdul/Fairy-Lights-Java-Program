@@ -5,25 +5,32 @@ package com.fairylights;
  * 
  */ 
 public class Light {
-    private static int count = 0;
-    private int index;
     private String colour;
-    private int colourIndex;
+    private Boolean state;
     /**
-    * @param index         nth light
     * @param colour        colour of light
-    * @param colourIndex   nth colour
+    * @param state         on/off state of light
     */
-    public Light(String colour, int indexColour) {
-        this.colour = colour;
-        this.index = count;
-        this.colourIndex = indexColour;
-        count++;
+    public Light(String colour) {
+        setColour(colour);
+        setState(false);
     }
-
     // Getter methods
-    public String colour(){return this.colour;};
-    public int index(){return this.index;};
-    public int colourIndex(){return this.colourIndex;};
-    
+    public String getColour(){return this.colour;};
+    // Returns state of light
+    public Boolean getState(){return this.state;};
+    // Set Colour
+    private void setColour(String colour){this.colour = colour;}
+    // Set On/off state
+    private void setState(Boolean state){this.state = state;}
+    // Flip light state
+    public void switchState(){
+        setState(!getState());
+        getCurrentStatus();
+    }
+    // Print Current Light State
+    private void getCurrentStatus(){
+        String state = this.getState() ? "On" : "Off";
+        System.out.println(String.format("%s Light %s", this.getColour(), state));
+    }
 }
